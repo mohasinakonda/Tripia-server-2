@@ -1,0 +1,16 @@
+{
+
+    "name":" something",
+    "type":"ac",
+    "city":"mymensingh",
+    "address":"valuka",
+    "distance":"59",
+    "photos":[],
+    "title":"awesome hotels",
+    "ratings":5,
+    "rooms":["101"],
+    
+    "cheapestPrice":101,
+    "featured":true
+    }
+    

@@ -7,7 +7,6 @@ require("dotenv/config");
 const app = express();
 
 const port = process.env.PORT || 5000;
-console.log(process.env.DB_URI);
 const connect = async () => {
   try {
     await mongoose.connect(process.env.DB_URI);
@@ -24,6 +23,7 @@ mongoose.connection.on("connected", () => {
   console.log("mongodb connected");
 });
 //middleware
+app.use(express.json());
 app.use("/auth/login", authRoute);
 app.use("/auth/hotels", hotelRoute);
 app.use("/auth/users", userRoute);
