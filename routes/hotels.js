@@ -7,8 +7,6 @@ const {
   deleteHotel,
 } = require("../controllers/hotels.js");
 
-const Hotel = require("../modals/Hotel.js");
-const createError = require("../utils/error.js");
 const router = express.Router();
 
 // CREATE

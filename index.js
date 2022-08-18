@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const authRoute = require("./users/authentication.js");
-const hotelRoute = require("./users/hotels.js");
-const userRoute = require("./users/users.js");
+const authRoute = require("./routes/authentication.js");
+const hotelRoute = require("./routes/hotels.js");
+const userRoute = require("./routes/users.js");
 require("dotenv/config");
 const app = express();
 
@@ -24,9 +24,9 @@ mongoose.connection.on("connected", () => {
 });
 //middleware
 app.use(express.json());
-app.use("/auth/login", authRoute);
+// app.use("/auth/login", authRoute);
 app.use("/auth/hotels", hotelRoute);
-app.use("/auth/users", userRoute);
+app.use("/auth/", userRoute);
 
 app.use((error, _req, res, next) => {
   const errorStatus = error.status || 500;
