@@ -5,9 +5,15 @@ const {
   getUser,
   getUsers,
 } = require("../controllers/user.js");
+const { verifyJWTtoken, verifyUser } = require("../utils/verify-jwt.js");
 
 const router = express.Router();
-
+router.get("/authentication", verifyJWTtoken, (req, res, next) => {
+  res.send("login successful");
+});
+router.get("/checkuser/:id", verifyUser, (req, res, next) => {
+  res.send("login successful and delete successful!");
+});
 // update
 router.put("/:id", updateUser);
 // GET HOTEL

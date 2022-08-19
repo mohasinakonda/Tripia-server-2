@@ -1,4 +1,3 @@
-const Hotel = require("../modals/.js");
 const User = require("../modals/User.js");
 
 // UPDATE USER
@@ -38,7 +37,7 @@ const getUser = async (req, res, next) => {
 //GET ALL USERS
 const getUsers = async (req, res, next) => {
   try {
-    const users = await Hotel.find();
+    const users = await User.find();
 
     res.status(200).json(users);
   } catch (error) {
