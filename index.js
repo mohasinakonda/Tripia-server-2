@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/users.js");
 const hotelRoute = require("./routes/hotels.js");
 const authRoute = require("./routes/authentication.js");
+const roomRoute = require("./routes/rooms.js");
 require("dotenv/config");
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(express.json());
 app.use("/auth/hotels", hotelRoute);
 app.use("/auth/", authRoute);
 app.use("/auth/user", userRoute);
+app.use("/auth/room", roomRoute);
 
 app.use((error, _req, res, next) => {
   const errorStatus = error.status || 500;

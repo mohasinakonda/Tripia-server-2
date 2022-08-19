@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const createError = require("./error.js");
 const err = require("./error.js");
 
-const verifyJWTtoken = (req, res, next) => {
+const verifyJWTToken = (req, res, next) => {
   const token = req.cookies.access_token;
   if (!token) {
     return next(createError(401, "you are not authenticated!"));
@@ -15,7 +15,7 @@ const verifyJWTtoken = (req, res, next) => {
 };
 
 const verifyUser = (req, res, next) => {
-  verifyJWTtoken(req, res, () => {
+  verifyJWTToken(req, res, next, () => {
     if (req.user.id === req.params.id || req.user.isAdmin) {
       next();
     } else {
@@ -23,4 +23,13 @@ const verifyUser = (req, res, next) => {
     }
   });
 };
-module.exports = { verifyJWTtoken, verifyUser };
+const verifyAdmin = (req, res, next) => {
+  verifyJWTToken(req, res, next, () => {
+    if (req.user.isAdmin) {
+      next();
+    } else {
+      return next(createError(403, "you are not authorized"));
+    }
+  });
+};
+module.exports = { verifyJWTToken, verifyUser, verifyAdmin };

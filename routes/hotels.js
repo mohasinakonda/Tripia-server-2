@@ -6,13 +6,14 @@ const {
   getHotels,
   deleteHotel,
 } = require("../controllers/hotels.js");
+const { verifyAdmin } = require("../utils/verify-jwt.js");
 
 const router = express.Router();
 
 // CREATE
-router.post("/", createHotel);
+router.post("/", verifyAdmin, createHotel);
 // update
-router.put("/:id", updateHotel);
+router.put("/:id", verifyAdmin, updateHotel);
 // GET HOTEL
 router.get("/:id", getHotel);
 //GET ALL HOTELS
