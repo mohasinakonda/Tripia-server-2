@@ -1,40 +1,53 @@
+const Hotel = require("../modals/.js");
 const User = require("../modals/User.js");
-const bcrypt = require("bcryptjs");
-const createError = require("../utils/error");
-// usr register
-const register = async (req, res, next) => {
-  try {
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(req.body.password, salt);
-    const newUser = new User({
-      username: req.body.username,
-      email: req.body.email,
-      password: hash,
-    });
-    await newUser.save();
-    res.status(200).send({ message: "user has been created!" });
-  } catch (err) {
-    next(err);
-  }
-};
-// user login
-const login = async (req, res, next) => {
-  try {
-    const user = await User.findOne({ username: req.body.username });
 
-    if (!user) return next(createError(404, "user not found!"));
-    const comparePassword = await bcrypt.compare(
-      req.body.password,
-      user.password
+// UPDATE USER
+const updateUser = async (req, res, next) => {
+  try {
+    const updateUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { $set: req.body },
+      { new: true }
     );
-    if (!comparePassword)
-      return next(createError(400, "wrong password or username!"));
-    const { password, isAdmin, ...otherDetails } = user._doc;
-    res.status(200).json({ ...otherDetails });
-  } catch (err) {
-    // console.log(err);
-    next(err);
+    res.status(200).json(updateUser);
+  } catch (error) {
+    next(error);
   }
 };
+// DELETE USER
+const deleteUser = async (req, res, next) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
 
-module.exports = { register, login };
+    res.status(200).json("User deleted successfully");
+  } catch (error) {
+    next(error);
+  }
+};
+//GET User
+
+const getUser = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+//GET ALL USERS
+const getUsers = async (req, res, next) => {
+  try {
+    const users = await Hotel.find();
+
+    res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+};
+module.exports = {
+  updateUser,
+  deleteUser,
+  getUser,
+  getUsers,
+};

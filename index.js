@@ -1,8 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
+
 const authRoute = require("./routes/authentication.js");
 const hotelRoute = require("./routes/hotels.js");
-const userRoute = require("./routes/users.js");
+const userRoute = require("./routes/authentication.js");
 require("dotenv/config");
 const app = express();
 
@@ -23,6 +25,7 @@ mongoose.connection.on("connected", () => {
   console.log("mongodb connected");
 });
 //middleware
+app.use(cookieParser());
 app.use(express.json());
 // app.use("/auth/login", authRoute);
 app.use("/auth/hotels", hotelRoute);
