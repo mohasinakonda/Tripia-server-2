@@ -52,10 +52,21 @@ const getHotels = async (req, res, next) => {
     next(error);
   }
 };
+const countByCities = async (req, res, next) => {
+  try {
+    const hotels = await Hotel.find();
+
+    res.status(200).json(hotels);
+  } catch (error) {
+    next(error);
+  }
+};
+// countByCity name
 module.exports = {
   createHotel,
   updateHotel,
   deleteHotel,
   getHotel,
   getHotels,
+  countByCity,
 };
