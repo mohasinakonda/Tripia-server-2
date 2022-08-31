@@ -1,11 +1,11 @@
 {
-    "version": 2,
-    "name": "music-album",
+    "version": 1,
+    "name": "tripa-server2",
     "builds": [
-       { "src": "app.js", "use": "@vercel/node" }
+       { "src": "index.js", "use": "@vercel/node" }
     ],
     "routes": [
-       { "src": "/(.*)", "dest": "/app.js" }
+       { "src": "/(.*)", "dest": "/index.js" }
     ]
  }
  
