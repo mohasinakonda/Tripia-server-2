@@ -5,7 +5,8 @@ const {
   getHotel,
   getHotels,
   deleteHotel,
-  countByCity,
+  countByCities,
+  getHotelByDivision,
 } = require("../controllers/hotels.js");
 const { verifyAdmin } = require("../utils/verify-jwt.js");
 
@@ -17,9 +18,11 @@ router.post("/", createHotel);
 router.put("/:id", verifyAdmin, updateHotel);
 // GET HOTEL
 router.get("/:id", getHotel);
+//get hotels by division
+router.get("/division/:division", getHotelByDivision);
 //GET ALL HOTELS
 router.get("/", getHotels);
-router.get("/countByCities", countByCity);
+router.get("/countByCities", countByCities);
 // router.get("/countByType", getHotels);
 
 // DELETE

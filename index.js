@@ -29,7 +29,7 @@ mongoose.connection.on("connected", () => {
 app.use(cookieParser());
 app.use(express.json());
 
-app.use("/auth/hotels", hotelRoute);
+app.use("/auth/hotels/", hotelRoute);
 app.use("/auth/", authRoute);
 app.use("/auth/user", userRoute);
 app.use("/auth/room", roomRoute);

@@ -10,6 +10,12 @@ const hotelSchema = new Schema({
     type: String,
     required: true,
   },
+
+  division: {
+    type: String,
+    required: true,
+  },
+
   city: {
     type: String,
     required: true,

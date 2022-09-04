@@ -52,6 +52,15 @@ const getHotels = async (req, res, next) => {
     next(error);
   }
 };
+// get hotels by division name
+const getHotelByDivision = async (req, res, next) => {
+  try {
+    const divisionsResult = await Hotel.find({ division: req.params.division });
+    res.status(200).json(divisionsResult);
+  } catch (err) {
+    next(err);
+  }
+};
 const countByCities = async (req, res, next) => {
   try {
     const hotels = await Hotel.find();
@@ -68,5 +77,6 @@ module.exports = {
   deleteHotel,
   getHotel,
   getHotels,
-  countByCity,
+  countByCities,
+  getHotelByDivision,
 };
